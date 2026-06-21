@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  
+  --color-brand-bg: #FAF6F0;
+  --color-brand-blue: #2E54FE;
+  --color-brand-peach: #FFBC95;
+  --color-brand-orange: #FF6B35;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+  }
+  body {
+    background-color: var(--color-brand-bg);
+    color: #1c1917;
+    overflow-x: hidden;
+  }
+  
+  /* Disable default cursor for custom cursor on desktop */
+  @media (pointer: fine) {
+    .custom-cursor-active,
+    .custom-cursor-active a,
+    .custom-cursor-active button,
+    .custom-cursor-active select,
+    .custom-cursor-active input,
+    .custom-cursor-active textarea {
+      cursor: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  .border-brand {
+    border: 2px solid var(--color-brand-blue);
+  }
+  
+  .shadow-brutal {
+    box-shadow: 4px 4px 0px 0px var(--color-brand-blue);
+  }
+  
+  .shadow-brutal-peach {
+    box-shadow: 4px 4px 0px 0px var(--color-brand-peach);
+  }
+
+  .shadow-brutal-orange {
+    box-shadow: 4px 4px 0px 0px var(--color-brand-orange);
+  }
+
+  .shadow-brutal-interactive {
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .shadow-brutal-interactive:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px var(--color-brand-blue);
+  }
+
+  .shadow-brutal-interactive-peach:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px var(--color-brand-peach);
+  }
+
+  /* Infinite marquee speed */
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+  border-left: 2px solid var(--color-brand-blue);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-blue);
+  border: 2px solid var(--color-brand-bg);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-orange);
+}
+
+/* Keyframes */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Float animations */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-slower {
+  animation: float-slow 9s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Custom text outline */
+.text-outline-blue {
+  -webkit-text-stroke: 1.5px var(--color-brand-blue);
+  color: transparent;
+}
+.text-outline-peach {
+  -webkit-text-stroke: 1.5px var(--color-brand-peach);
+  color: transparent;
+}
+
