@@ -1,17 +1,40 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Trash2 } from 'lucide-react';
 
 const INITIAL_STICKERS = [
-  { id: 'react', text: '⚛️ React.js', rotate: -5, x: 50, y: 60, bg: '#E0F2FE', color: '#0369A1' },
-  { id: 'node', text: '🟢 Node.js', rotate: 8, x: 300, y: 150, bg: '#DCFCE7', color: '#15803D' },
-  { id: 'coffee', text: '☕ Coffee Fueled', rotate: -12, x: 180, y: 40, bg: '#FEF3C7', color: '#B45309' },
-  { id: 'kerala', text: '🌴 Kerala, India', rotate: 6, x: 500, y: 100, bg: '#FEE2E2', color: '#B91C1C' },
-  { id: 'headphones', text: '🎧 Bass Head', rotate: -6, x: 620, y: 220, bg: '#F3E8FF', color: '#6B21A8' },
-  { id: 'bug', text: '🐛 Bug Free*', rotate: 15, x: 100, y: 240, bg: '#FFEDD5', color: '#C2410C' },
-  { id: 'mongodb', text: '🍃 MongoDB', rotate: -3, x: 420, y: 260, bg: '#E2FBE8', color: '#14532D' },
-  { id: 'nihal', text: 'nihal.pm ✦', rotate: -8, x: 520, y: 20, bg: '#2E54FE', color: '#FFFFFF', isBrand: true },
+  { id: 'react', text: '⚛️ React.js', rotate: -5, bg: '#E0F2FE', color: '#0369A1' },
+  { id: 'node', text: '🟢 Node.js', rotate: 8, bg: '#DCFCE7', color: '#15803D' },
+  { id: 'coffee', text: '☕ Coffee Fueled', rotate: -12, bg: '#FEF3C7', color: '#B45309' },
+  { id: 'kerala', text: '🌴 Kerala, India', rotate: 6, bg: '#FEE2E2', color: '#B91C1C' },
+  { id: 'headphones', text: '🎧 Bass Head', rotate: -6, bg: '#F3E8FF', color: '#6B21A8' },
+  { id: 'bug', text: '🐛 Bug Free*', rotate: 15, bg: '#FFEDD5', color: '#C2410C' },
+  { id: 'mongodb', text: '🍃 MongoDB', rotate: -3, bg: '#E2FBE8', color: '#14532D' },
+  { id: 'nihal', text: 'nihal.pm ✦', rotate: -8, bg: '#2E54FE', color: '#FFFFFF', isBrand: true },
 ];
+
+const STICKER_POSITIONS = {
+  mobile: [
+    { id: 'react', left: '6%', top: '8%' },
+    { id: 'coffee', left: '50%', top: '14%' },
+    { id: 'nihal', left: '10%', top: '28%' },
+    { id: 'node', left: '52%', top: '36%' },
+    { id: 'kerala', left: '5%', top: '52%' },
+    { id: 'headphones', left: '50%', top: '58%' },
+    { id: 'bug', left: '8%', top: '74%' },
+    { id: 'mongodb', left: '52%', top: '80%' },
+  ],
+  desktop: [
+    { id: 'react', left: '8%', top: '15%' },
+    { id: 'coffee', left: '28%', top: '10%' },
+    { id: 'nihal', left: '75%', top: '5%' },
+    { id: 'kerala', left: '70%', top: '28%' },
+    { id: 'node', left: '42%', top: '35%' },
+    { id: 'headphones', left: '72%', top: '55%' },
+    { id: 'bug', left: '12%', top: '55%' },
+    { id: 'mongodb', left: '40%', top: '65%' },
+  ]
+};
 
 const STAMP_SHAPES = [
   '😊', '⭐️', '💖', '🔥', '💻', '✨', '⚡️', '✌️'
@@ -21,6 +44,23 @@ export default function StickerSandbox() {
   const constraintsRef = useRef(null);
   const [stamps, setStamps] = useState([]);
   const [stampIndex, setStampIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const stickers = INITIAL_STICKERS.map(sticker => {
+    const pos = isMobile 
+      ? STICKER_POSITIONS.mobile.find(p => p.id === sticker.id) 
+      : STICKER_POSITIONS.desktop.find(p => p.id === sticker.id);
+    return { ...sticker, ...pos };
+  });
 
   const handleCanvasClick = (e) => {
     // Avoid stamping if clicking directly on a button or sticker
@@ -93,8 +133,11 @@ export default function StickerSandbox() {
           {/* Background grid indicators */}
           <div className="absolute inset-0 bg-[radial-gradient(rgba(46,84,254,0.1)_1.5px,transparent_1.5px)] bg-[size:24px_24px] pointer-events-none" />
           
-          <div className="absolute bottom-4 left-6 text-[10px] font-mono font-bold text-zinc-400 pointer-events-none uppercase tracking-wider">
-            [ Physics Boundary Sandbox • Click Canvas to Stamp • Drag Badges ]
+          <div className="absolute bottom-4 left-6 right-6 text-[10px] font-mono font-bold text-zinc-400 pointer-events-none uppercase tracking-wider text-center md:text-left">
+            {isMobile 
+              ? '[ Stamp Canvas • Drag Badges ]' 
+              : '[ Physics Boundary Sandbox • Click Canvas to Stamp • Drag Badges ]'
+            }
           </div>
 
           {/* Render Stamps (Stamps are stationary but animate on mount) */}
@@ -114,21 +157,22 @@ export default function StickerSandbox() {
           ))}
 
           {/* Render Draggable Stickers */}
-          {INITIAL_STICKERS.map((sticker) => (
+          {stickers.map((sticker) => (
             <motion.div
-              key={sticker.id}
+              key={`${sticker.id}-${isMobile}`}
               drag
               dragConstraints={constraintsRef}
               dragElastic={0.15}
               dragTransition={{ power: 0.2, bounceStiffness: 200, bounceDamping: 15 }}
               whileDrag={{ scale: 1.1, rotate: sticker.rotate * 1.5, zIndex: 30 }}
-              initial={{ x: sticker.x, y: sticker.y }}
               className="sticker-item absolute px-5 py-2.5 rounded-2xl border-2 border-brand-blue font-bold text-sm tracking-wide cursor-grab active:cursor-grabbing select-none z-20 flex items-center justify-center shadow-[3px_3px_0px_0px_rgba(46,84,254,1)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-[box-shadow,transform]"
               style={{
                 backgroundColor: sticker.bg,
                 color: sticker.color,
                 rotate: sticker.rotate,
                 borderColor: sticker.isBrand ? '#2E54FE' : '#1c1917',
+                left: sticker.left,
+                top: sticker.top,
               }}
               data-cursor-type="drag"
             >

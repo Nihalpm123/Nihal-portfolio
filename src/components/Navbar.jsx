@@ -113,7 +113,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer Navigation */}
       <div 
-        className={`lg:hidden fixed inset-y-0 right-0 w-64 bg-brand-bg border-l-2 border-brand-blue shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`lg:hidden fixed inset-y-0 right-0 w-64 bg-brand-bg border-l-2 border-brand-blue shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -126,7 +126,7 @@ export default function Navbar() {
             <X className="w-4 h-4" />
           </button>
         </div>
-        <div className="flex flex-col pt-6 px-6 space-y-3">
+        <div className="flex flex-col pt-6 px-6 pb-8 space-y-3 overflow-y-auto flex-1">
           {navItems.map((item) => {
             const isActive = activeSection === item.href.substring(1);
             return (

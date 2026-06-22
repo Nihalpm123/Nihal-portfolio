@@ -42,10 +42,10 @@ export default function About() {
           <div className="lg:col-span-7 space-y-8">
             
             {/* Custom Interactive Tab Controls */}
-            <div className="flex border-2 border-brand-blue rounded-2xl bg-white p-1.5 shadow-[4px_4px_0px_0px_rgba(46,84,254,1)] w-max">
+            <div className="grid grid-cols-2 sm:flex border-2 border-brand-blue rounded-2xl bg-white p-1.5 shadow-[4px_4px_0px_0px_rgba(46,84,254,1)] w-full sm:w-max">
               <button
                 onClick={() => setActiveTab('dev')}
-                className={`flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`flex items-center justify-center space-x-2 px-3 py-2.5 sm:px-5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   activeTab === 'dev'
                     ? 'bg-brand-blue text-white shadow-[2px_2px_0px_0px_#FFBC95]'
                     : 'text-zinc-700 hover:text-brand-blue'
@@ -57,7 +57,7 @@ export default function About() {
               
               <button
                 onClick={() => setActiveTab('human')}
-                className={`flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`flex items-center justify-center space-x-2 px-3 py-2.5 sm:px-5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   activeTab === 'human'
                     ? 'bg-brand-blue text-white shadow-[2px_2px_0px_0px_#FFBC95]'
                     : 'text-zinc-700 hover:text-brand-blue'

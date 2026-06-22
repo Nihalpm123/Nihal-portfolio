@@ -77,7 +77,7 @@ export default function Hero() {
             <h2 className="text-xl sm:text-2xl font-bold font-sans text-brand-blue uppercase tracking-wide">
               Hello, visitor. I'm
             </h2>
-            <h1 className="text-6xl sm:text-7xl xl:text-8xl font-black font-display text-zinc-900 tracking-tight leading-[0.9] uppercase">
+            <h1 className="text-5xl min-[375px]:text-6xl sm:text-7xl xl:text-8xl font-black font-display text-zinc-900 tracking-tight leading-[0.9] uppercase">
               Nihal <br /> P M
             </h1>
             <p className="text-2xl sm:text-3xl font-bold font-sans text-brand-blue tracking-tight">
@@ -91,10 +91,10 @@ export default function Hero() {
           </p>
 
           {/* Action CTAs (Brutalist offsets) */}
-          <div className="flex flex-wrap gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button
               onClick={() => handleScrollToSection('projects')}
-              className="flex items-center justify-center space-x-2 px-8 py-4 border-2 border-brand-blue rounded-xl font-bold text-white bg-brand-blue shadow-[4px_4px_0px_0px_#FFBC95] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all cursor-pointer group"
+              className="flex items-center justify-center space-x-2 px-8 py-4 border-2 border-brand-blue rounded-xl font-bold text-white bg-brand-blue shadow-[4px_4px_0px_0px_#FFBC95] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all cursor-pointer group w-full sm:w-auto"
             >
               <span>Explore My Work</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -102,7 +102,7 @@ export default function Hero() {
             
             <button
               onClick={() => handleScrollToSection('contact')}
-              className="flex items-center justify-center px-8 py-4 border-2 border-brand-blue rounded-xl font-bold text-brand-blue bg-brand-bg shadow-[4px_4px_0px_0px_rgba(46,84,254,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all cursor-pointer"
+              className="flex items-center justify-center px-8 py-4 border-2 border-brand-blue rounded-xl font-bold text-brand-blue bg-brand-bg shadow-[4px_4px_0px_0px_rgba(46,84,254,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] transition-all cursor-pointer w-full sm:w-auto"
             >
               Let's Chat
             </button>
@@ -203,7 +203,7 @@ export default function Hero() {
 
             {/* Inner Border Card */}
             <div 
-              className="relative w-72 h-72 sm:w-80 sm:h-80 xl:w-[380px] xl:h-[380px] rounded-[28px] border-2 border-brand-blue bg-white overflow-hidden p-3 z-10"
+              className="relative w-64 h-64 min-[375px]:w-72 min-[375px]:h-72 sm:w-80 sm:h-80 xl:w-[380px] xl:h-[380px] rounded-[28px] border-2 border-brand-blue bg-white overflow-hidden p-3 z-10"
               style={{ transform: "translateZ(20px)" }}
             >
               <div className="w-full h-full rounded-[18px] overflow-hidden bg-brand-bg relative">
@@ -217,14 +217,14 @@ export default function Hero() {
 
             {/* Parallax Floating Tags */}
             <div 
-              className="absolute bottom-4 -left-6 px-4 py-2 bg-brand-blue border-2 border-brand-blue rounded-xl text-white text-xs font-bold shadow-[2px_2px_0px_0px_rgba(250,246,240,1)] z-20 pointer-events-none"
+              className="absolute bottom-2 left-2 sm:bottom-4 sm:-left-6 px-4 py-2 bg-brand-blue border-2 border-brand-blue rounded-xl text-white text-xs font-bold shadow-[2px_2px_0px_0px_rgba(250,246,240,1)] z-20 pointer-events-none"
               style={{ transform: "translateZ(40px)" }}
             >
               CYRA JUNIOR DEV
             </div>
             
             <div 
-              className="absolute -top-6 right-6 px-4 py-2 bg-white border-2 border-brand-blue rounded-xl text-brand-blue text-xs font-bold shadow-[2px_2px_0px_0px_rgba(46,84,254,1)] z-20 pointer-events-none"
+              className="absolute -top-3 right-3 sm:-top-6 sm:right-6 px-4 py-2 bg-white border-2 border-brand-blue rounded-xl text-brand-blue text-xs font-bold shadow-[2px_2px_0px_0px_rgba(46,84,254,1)] z-20 pointer-events-none"
               style={{ transform: "translateZ(45px)" }}
             >
               MERN STACK
